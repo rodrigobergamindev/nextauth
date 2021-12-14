@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext';
-import styles from '../styles/Home.module.css'
+import styles from '../styles/home.module.css'
 
 export default function Home() {
 
@@ -12,6 +12,7 @@ export default function Home() {
   const {signIn} = useContext(AuthContext)
 
   async function handleSubmit(event) {
+   
     event.preventDefault()
     const data = {
       email,
