@@ -58,6 +58,9 @@ api.interceptors.response.use(response => {
                     failedRequestQueue.forEach(request => request.onFailure(error))
                     failedRequestQueue = [];
 
+                    if (process.browser) {
+                        signOut();
+                      }
                 }
             ).
             finally(() => {
@@ -85,9 +88,10 @@ api.interceptors.response.use(response => {
         
     } else {
        signOut();
+       return Promise.reject(error)
     }
     }
-    signOut();
+    
     console.log(error)
     return Promise.reject(error)
 
