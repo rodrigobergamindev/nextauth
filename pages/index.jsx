@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { useContext, useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext';
 import styles from '../styles/home.module.css'
+import {parseCookies} from 'nookies'
+
+
 
 export default function Home() {
 
@@ -38,4 +41,25 @@ export default function Home() {
 
     </div>
   )
+}
+
+
+export async function getServerSideProps (context) {
+
+  const cookies = parseCookies(context)
+
+  if(cookies['nextauth.token']) {
+
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
+  
 }

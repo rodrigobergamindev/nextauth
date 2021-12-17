@@ -1,3 +1,4 @@
+import { parseCookies } from "nookies"
 import { useContext, useEffect } from "react"
 import { AuthContext } from "../contexts/AuthContext"
 import { api } from "../services/api"
@@ -18,3 +19,24 @@ export default function Dashboard() {
         </div>
     )
 }
+
+
+export async function getServerSideProps (context) {
+
+    const cookies = parseCookies(context)
+  
+    if(!cookies['nextauth.token']) {
+  
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        }
+      }
+    }
+  
+    return {
+      props: {}
+    }
+    
+  }
