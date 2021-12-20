@@ -32,7 +32,6 @@ export function setupAPIClient(context = undefined) {
               if(!isRefreshing) {
                  
                 isRefreshing = true
-                console.log('refreshing')
     
                 api.post('/refresh', {
                     refreshToken,
